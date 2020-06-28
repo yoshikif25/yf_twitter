@@ -1,0 +1,6 @@
+.title
+  - Article.all.each do |article|
+    = article.tweet
+    %br/
+= link_to new_articles_path do
+  = "ツイート作成ページへ"
