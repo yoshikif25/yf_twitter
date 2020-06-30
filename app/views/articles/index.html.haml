@@ -1,7 +1,11 @@
 - if user_signed_in?
   = "#{current_user.account_name}さんでログイン中"
+  %br/
   = link_to new_articles_path do
     = "ツイート作成ページへ"
+  %br/
+  = link_to destroy_user_session_path, method: "delete" do
+    = "ログアウト"
 - else
   = "ログインしていません"
   %br/
@@ -11,5 +15,6 @@
 
 .title
   - Article.all.each do |article|
+    -#= "#{article.user.account_name}(#{article.created_at.in_time_zone('Tokyo').strftime("%Y/%m/%d %H:%M:%S")})："
     = article.tweet
     %br/
