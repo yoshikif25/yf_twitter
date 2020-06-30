@@ -1,4 +1,6 @@
 class ArticlesController < ApplicationController
+  before_action :authenticate_user!, except: :index
+
   def index
     @article = "これは表示される内容が変わります"
   end
@@ -20,6 +22,6 @@ class ArticlesController < ApplicationController
   private
 
   def set_params
-    params[:article].permit(:tweet)
+    params[:article].permit(:tweet).merge(user_id: current_user.id)
   end
 end
