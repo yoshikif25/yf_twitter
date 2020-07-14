@@ -1,7 +1,7 @@
 - if user_signed_in?
   = "#{current_user.account_name}さんでログイン中"
   %br/
-  = link_to new_articles_path do
+  = link_to new_article_path do
     = "ツイート作成ページへ"
   %br/
   = link_to destroy_user_session_path, method: "delete" do
@@ -12,9 +12,13 @@
   = link_to new_user_registration_path do
     ="ユーザー登録ページへ"
   %br/
+  = link_to new_user_session_path do
+    ="ログインページへ"
 
-.title
-  - Article.all.each do |article|
+- Article.all.each do |article|
+  .title{:action => "#{create_like_article_path(article)}"}
     = "#{article.user.account_name}(#{article.created_at.in_time_zone('Tokyo').strftime("%Y/%m/%d %H:%M:%S")})："
     = article.tweet
+    %span{:style => "color:blue"}
+      いいね！#{article.likes.count}
     %br/
