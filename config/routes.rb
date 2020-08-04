@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
   devise_for :users
   root "articles#index"
-  resource :articles, only: [:index, :new, :create]
+  resources :articles, only: [:index, :new, :create] do
+    member do
+      get "create_like"
+    end
+  end
+  resources :users, only: :show
 end
