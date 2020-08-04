@@ -1,12 +1,16 @@
 document.addEventListener("turbolinks:load", function(){
   $(function(){
-    $(".title").on("click", function(){
-      $(this).addClass("active");
+    $(".like").on("click", function(){
       $.ajax({
         url: $(this).attr("action"),
         type: "get"
-      }).done(function(){
-        $(".active").css("font-weight", "bold");
+      }).done(function(json){
+        $(`#article${json.article}`).text(`いいね！${json.like}`);
+        if(json.liked == "like"){
+          $(`#article${json.article}`).addClass("active");
+        }else{
+          $(`#article${json.article}`).removeClass("active");
+        }
       })
     })
   })

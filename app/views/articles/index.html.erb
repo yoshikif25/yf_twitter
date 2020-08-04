@@ -1,0 +1,39 @@
+<% if user_signed_in? %>
+  <%= "#{current_user.account_name}さんでログイン中" %>
+  <%= link_to new_article_path do %>
+    <%= "ツイート作成ページへ" %>
+  <% end %>
+  <br>
+  <%= link_to destroy_user_session_path, method: "delete" do %>
+    <%= "ログアウト" %>
+  <% end %>
+<% else %>
+  <%= "ログインしていません" %>
+  <br>
+  <%= link_to new_user_registration_path do %>
+    <%= "ユーザー登録ページへ" %>
+  <% end %>
+  <br>
+  <%= link_to new_user_session_path do %>
+    <%= "ログインページへ" %>
+  <% end %>
+<% end %>
+
+<% Article.all.each do |article| %>
+  <% if user_signed_in? %>
+    <div class="title">
+      <%= link_to "#{article.user.account_name}", user_path(article.user.id) %>
+      <%= "(#{article.created_at.in_time_zone('Tokyo').strftime("%Y/%m/%d %H:%M:%S")})：" %>
+      <%= article.tweet %>
+      <span action="<%= create_like_article_path(article) %>" class="like <% if article.likes.find_by(user_id: current_user.id) != nil %>active<% end %>" id="article<%= article.id%>" style="color:blue">いいね！<%= article.likes.count %></span>
+      <br>
+    </div>
+  <% else %>
+    <div class="title">
+      <%= "#{article.user.account_name}(#{article.created_at.in_time_zone('Tokyo').strftime("%Y/%m/%d %H:%M:%S")})：" %>
+      <%= article.tweet %>
+      <span action="<%= create_like_article_path(article) %>" class="like" style="color:blue">いいね！<%= article.likes.count %></span>
+      <br>
+    </div>
+  <% end %>
+<% end %>
