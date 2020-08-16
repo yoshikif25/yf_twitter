@@ -1,12 +1,60 @@
-<%= "#{@user.account_name}さんのマイページ"%><br>
-
-<% Article.where(user_id: @user.id).each do |article| %>
-  <div class="title">
-    <%= "#{article.user.account_name}(#{article.created_at.in_time_zone('Tokyo').strftime("%Y/%m/%d %H:%M:%S")})：" %>
-    <%= article.tweet %>
-    <span action="<%= create_like_article_path(article) %>" class="like <% if article.likes.find_by(user_id: current_user.id) != nil %>active<% end %>" id="article<%= article.id%>" style="color:blue">いいね！<%= article.likes.count %></span>
-    <br>
+<div class="wrapper">
+  <%= render "layouts/sidebar"%>
+  <div class="main-wrapper">
+    <div class="main-box">
+      <span class="index-title"><%= @user.account_name %></span>
+      <p class="index-title-bottom"><%= "#{Article.where(user_id: @user.id).count}ツイート" %></p>
+    </div>
+    <div class="main-box">
+      <%= image_tag "user_icon.png", alt: "image", class: "profile-icon"%>
+      <div class="index-title flex-between">
+        <p><%= @user.account_name %></p>
+        <% if @user.id != current_user.id %>
+          <div id="follow" action="<%= follow_user_path(@user.id)%>">
+            <% if Follow.find_by(followed_by_id: current_user.id) == nil %>
+              フォロー
+            <% else %>
+              フォロー中
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+      <p class="index-title-bottom">@<%= @user.account_id %></p>
+      <p class="index-title-bottom"><i class="far fa-calendar-alt"></i><%= @user.created_at.in_time_zone('Tokyo').strftime("%Y年%m月") %>からTweeterを利用しています</p>
+      <p class="index-title-bottom"><span class="follower"><%= Follow.where(following_id: @user.id).count %></span>フォロー<span class="space"></span><span class="follower" id="follower"><%= Follow.where(followed_by_id: @user.id).count %></span>フォロワー</p>
+    </div>
+    <% Article.where(user_id: @user.id).order(created_at: "DESC").each do |article| %>
+      <div class="main-box">
+        <div class="tweet-viewbox">
+            <div class="tweet-box-left">
+              <%= image_tag "user_icon.png", alt: "image", class: "user-icon"%>
+            </div>
+            <div class="tweet-box-right">
+              <div class="tweet-box-right-top">
+                <%= link_to user_path(article.user.id), class: "user-box" do %>
+                  <span class="user-name"><%= "#{article.user.account_name}" %></span>
+                  <span class="user-id"><%= "@#{article.user.account_id}" %></span>
+                <% end %>
+                <time datetime="<%= article.created_at %>">
+                  <span class="dot">･</span>
+                  <%= time_ago_in_words(article.created_at) %>
+                </time>
+              </div>
+              <div class="tweet-box-right-middle">
+                <%= article.tweet %>
+              </div>
+              <div class="tweet-box-right-bottom">
+                <span action="<%= create_like_article_path(article) %>" class="like" id="article<%= article.id%>">
+                  <% if article.likes.find_by(user_id: current_user.id) != nil %>
+                    <i class="fas fa-heart"></i><%= article.likes.count %>
+                  <% else %>
+                    <i class="far fa-heart"></i><%= article.likes.count %>
+                  <% end %>
+                </span>
+              </div>
+            </div>
+        </div>
+      </div>
+    <% end %>
   </div>
-<% end %>
-
-<%= link_to "トップページに戻る",root_path %>
+</div>

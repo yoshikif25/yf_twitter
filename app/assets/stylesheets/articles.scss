@@ -1,6 +1,165 @@
-.title{
-  color: red;
-}
-.active{
-  font-weight: bold;
+.wrapper{
+  display: flex;
+  justify-content: center;
+  .main-wrapper{
+    width: 600px;
+    border-right: 1px solid #444;
+    a{
+      text-decoration: none;
+    }
+    .main-box{
+      padding: 12px;
+      border-bottom: 1px solid #444;
+      .fa-calendar-alt{
+        padding-right: 6px;
+      }
+      .tweet-notification-box{
+        display: flex;
+        flex-direction: column;
+        &-top{
+          display: flex;
+          align-items: center;
+          .user-icon{
+            width: 24px;
+            height: 24px;
+          }
+          i{
+            font-size: 24px;
+            margin-right: 14px;
+          }
+        }
+        &-middle{
+          font-size: 14px;
+          margin: 8px 0 4px 34px;
+        }
+        &-bottom{
+          color: #999;
+          font-size: 14px;
+          margin-left: 34px;
+        }
+      }
+      .tweet-viewbox{
+        display: flex;
+        .tweet-box-left{
+          margin-right: 10px;
+        }
+        .tweet-box-right{
+          width: 550px;
+          display: flex;
+          flex-direction: column;
+          &-top{
+            time{
+              color: #999;
+              font-size: 13px;
+              .dot{
+                font-size: 12px;
+              }
+            }
+          }
+          &-bottom{
+            color: #999;
+            font-size: 14px;
+            .like{
+              cursor: pointer;
+            }
+            i{
+              margin-right: 6px;
+            }
+          }
+        }
+        .user-box{
+          text-decoration: none;
+          .user-name{
+            font-weight: bold;
+          }
+          .user-id{
+            color: #999;
+            font-size: 14px;
+          }
+        }
+      }
+      form{
+        display: inline-block;
+        vertical-align: middle;
+        .tweet-box{
+          width: 550px;
+          display: flex;
+          flex-direction: column;
+          &-bottom{
+            display: flex;
+            justify-content: flex-end;
+          }
+        }
+        textarea{
+          resize: none;
+          height: 40px;
+        }
+        input,textarea{
+          border: none;
+          color: #fafafa;
+          background: none;
+          vertical-align: middle;
+          &:focus{
+            outline: none;
+          }
+          width: 500px;
+        }
+        textarea{
+          padding: 6px;
+          font-size: 18px;
+        }
+        input[type="submit"]{
+          width: 120px;
+          padding: 8px 0;
+          font-size: 14px;
+          cursor: pointer;
+          font-weight: bold;
+          text-align: center;
+          border-radius: 46px;
+          background-color: #4BA0EB;
+        }
+      }
+      .user-icon{
+        width: 40px;
+        height: 40px;
+        border-radius: 40px;
+        display: inline-block;
+        vertical-align: middle;
+      }
+      .profile-icon{
+        width: 120px;
+        height: 120px;
+        border-radius: 120px;
+      }
+      .index-title{
+        font-size: 18px;
+        font-weight: bold;
+      }
+      .flex-between{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      #follow{
+        font-size: 14px;
+        cursor: pointer;
+        font-weight: bold;
+        padding: 10px 18px;
+        border-radius: 20px;
+        background-color: #4BA0EB;
+      }
+      .index-title-bottom{
+        color: #999;
+        font-size: 14px;
+        padding: 1px 0;
+        .space{
+          padding-right: 6px;
+        }
+        .follower{
+          color: white;
+          font-weight: bold;
+        }
+      }
+    }
+  }
 }

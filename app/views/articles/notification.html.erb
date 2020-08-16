@@ -1,0 +1,37 @@
+<div class="wrapper">
+  <%= render "layouts/sidebar"%>
+  <div class="main-wrapper">
+    <div class="main-box">
+      <span class="index-title">通知</span>
+    </div>
+    <% Notification.where(notifying_id: current_user.id).order(created_at: "DESC").each do |notification| %>
+      <%= link_to user_path(User.find(notification.notified_by_id).id) do %>
+        <div class="main-box">
+          <div class="tweet-notification-box">
+            <div class="tweet-notification-box-top">
+              <% if notification.article_id != nil %>
+                <i class="fas fa-heart" style="color:red"></i>
+                <%= image_tag "user_icon.png", alt: "image", class: "user-icon"%>
+              <% else %>
+                <i class="fas fa-user" style="color:#4BA0EB"></i>
+                <%= image_tag "user_icon.png", alt: "image", class: "user-icon"%>
+              <% end %>
+            </div>
+            <% if notification.article_id != nil %>
+              <div class="tweet-notification-box-middle">
+                <span style="font-weight:bold"><%= User.find(notification.notified_by_id).account_name %></span>さんがあなたのツイートをいいねしました
+              </div>
+              <div class="tweet-notification-box-bottom">
+                <%= Article.find(notification.article_id).tweet %>
+              </div>
+            <% else %>
+              <div class="tweet-notification-box-middle">
+                <span style="font-weight:bold"><%= User.find(notification.notified_by_id).account_name %></span>さんにフォローされました
+              </div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,18 @@
+body{
+  background-color: #151D27;
+  color: #fafafa;
+}
+
+@import "font-awesome-sprockets";
+@import "font-awesome";
+@import "reset";
+@import "sidebar";
+@import "articles";
+
+a{
+  color: white;
+}
+
+.active{
+  font-weight: bold;
+}
