@@ -1,0 +1,52 @@
+.side-wrapper{
+  width: 235px;
+  padding: 10px;
+  min-height :100vh;
+  border-right: 1px solid #444;
+  .tweet-button{
+    display: flex;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 12px;
+    padding: 12px 10px;
+    border-radius: 46px;
+    flex-direction: column;
+    background-color: #4BA0EB;
+    &:hover{
+      background-color: #1C2D3E;
+    }
+    span{
+      font-weight: bold;
+      text-align: center;
+      display: inline-block;
+      vertical-align: middle;
+    }
+  }
+  .side-active{
+    color: #1DA1F2;
+  }
+  .side-content{
+    display: flex;
+    border-radius: 46px;
+    flex-direction: column;
+    &:hover{
+      background-color: #1C2D3E;
+    }
+    a{
+      padding: 12px 10px;
+      text-decoration: none;
+      i{
+        width: 40px;
+        font-size: 22px;
+        text-align: center;
+        vertical-align: middle;
+      }
+      span{
+        font-weight: bold;
+        padding-left: 16px;
+        display: inline-block;
+        vertical-align: middle;
+      }
+    }
+  }
+}

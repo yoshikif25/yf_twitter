@@ -1,0 +1,55 @@
+<div class="side-wrapper">
+  <div class="side-content">
+    <%= link_to root_path do %>
+      <i class="fab fa-twitter"></i>
+    <% end %>
+  </div>
+  <% if user_signed_in? %>
+    <div class="side-content">
+      <%= link_to root_path do %>
+        <% if "#{controller.controller_name}##{controller.action_name}" == "articles#index"%>
+          <i class="fas fa-home side-active"></i><span class="side-active">ホーム</span>
+        <% else %>
+          <i class="fas fa-home"></i><span>ホーム</span>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="side-content">
+      <%= link_to notification_articles_path do %>
+        <% if "#{controller.controller_name}##{controller.action_name}" == "articles#notification"%>
+          <i class="fas fa-bell side-active"></i><span class="side-active">通知</span>
+        <% else %>
+          <i class="fas fa-bell"></i><span>通知</span>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="side-content">
+      <%= link_to user_path(current_user) do %>
+        <% if "#{controller.controller_name}##{controller.action_name}" == "users#show"%>
+          <i class="fas fa-user side-active"></i><span class="side-active">プロフィール</span>
+        <% else %>
+          <i class="fas fa-user"></i><span>プロフィール</span>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="side-content">
+      <%= link_to destroy_user_session_path, method: "delete" do %>
+        <i class="fas fa-sign-out-alt"></i><span>ログアウト</span>
+      <% end %>
+    </div>
+    <div class="tweet-button">
+      <span>ツイートする</span>
+    </div>
+  <% else %>
+    <div class="side-content">
+      <%= link_to new_user_session_path do %>
+        <i class="fas fa-sign-in-alt"></i><span>ログイン</span>
+      <% end %>
+    </div>
+    <div class="side-content">
+      <%= link_to new_user_registration_path do %>
+        <i class="fas fa-user-plus"></i><span>新規会員登録</span>
+      <% end %>
+    </div>
+  <% end %>
+</div>

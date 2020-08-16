@@ -5,11 +5,25 @@ document.addEventListener("turbolinks:load", function(){
         url: $(this).attr("action"),
         type: "get"
       }).done(function(json){
-        $(`#article${json.article}`).text(`いいね！${json.like}`);
+        $(`#article${json.article}`).empty();
         if(json.liked == "like"){
-          $(`#article${json.article}`).addClass("active");
+          $(`#article${json.article}`).append(`<i class="fas fa-heart"></i>${json.like}`);
         }else{
-          $(`#article${json.article}`).removeClass("active");
+          $(`#article${json.article}`).append(`<i class="far fa-heart"></i>${json.like}`);
+        }
+      })
+    })
+    $("#follow").on("click", function(){
+      $.ajax({
+        url: $(this).attr("action"),
+        type: "get"
+      }).done(function(json){
+        if(json.follow == "follow"){
+          $("#follow").text("フォロー中");
+          $("#follower").text(json.follower);
+        }else{
+          $("#follow").text("フォロー");
+          $("#follower").text(json.follower);
         }
       })
     })
